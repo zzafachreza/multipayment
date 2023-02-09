@@ -13,7 +13,7 @@ export default function App() {
     <NavigationContainer>
       <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
       <Router />
-      <FlashMessage position="top" />
+      <FlashMessage position="bottom" />
     </NavigationContainer>
   );
 }

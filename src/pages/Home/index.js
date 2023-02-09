@@ -162,36 +162,43 @@ export default function Home({ navigation }) {
 
 
           <TouchableOpacity onPress={() => {
-            Alert.alert(MYAPP, 'Update status transaksi ?', [
-              {
-                'text': 'Tutup'
-              },
-              {
-                'text': 'Reject',
-                onPress: () => {
-                  axios.post(apiURL + 'update_status', {
-                    id_saldo: item.id_saldo,
-                    status: 'Reject',
-                  }).then(res => {
-                    console.log(res.data);
-                    __getTransaction();
-                  })
+            if (item.status == 'Waiting') {
+              Alert.alert(MYAPP, 'Update status transaksi ?', [
+                {
+                  'text': 'Tutup'
+                },
+                {
+                  'text': 'Reject',
+                  onPress: () => {
+                    axios.post(apiURL + 'update_status', {
+                      id_saldo: item.id_saldo,
+                      status: 'Reject',
+                    }).then(res => {
+                      console.log(res.data);
+                      __getTransaction();
+                    })
+                  }
+                },
+                {
+                  'text': 'Approve',
+                  onPress: () => {
+                    axios.post(apiURL + 'update_status', {
+                      id_saldo: item.id_saldo,
+                      status: 'Approve',
+                    }).then(res => {
+                      console.log(res.data);
+                      __getTransaction();
+                    })
+                  }
                 }
-              },
-              {
-                'text': 'Approve',
-                onPress: () => {
-                  axios.post(apiURL + 'update_status', {
-                    id_saldo: item.id_saldo,
-                    status: 'Approve',
-                  }).then(res => {
-                    console.log(res.data);
-                    __getTransaction();
-                  })
-                }
-              }
 
-            ])
+              ])
+            } else {
+              showMessage({
+                type: 'danger',
+                message: 'Status tidak dapat di ubah !'
+              })
+            }
           }}>
             <Text style={{
               backgroundColor: item.status == 'Reject' ? colors.danger : item.status == 'Approve' ? colors.primary : item.status == 'Done' ? colors.success : colors.secondary,
