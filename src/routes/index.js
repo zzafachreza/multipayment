@@ -28,6 +28,7 @@ import {
   SEdit,
   AAOrder,
   AASetor,
+  AAMember,
 } from '../pages';
 import { colors } from '../utils';
 
@@ -89,6 +90,19 @@ export default function Router() {
         options={{
           headerShown: true,
           headerTitle: 'Tambah Setor Saldo',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="AAMember"
+        component={AAMember}
+        options={{
+          headerShown: true,
+          headerTitle: 'Data Member Saya',
           headerStyle: {
             backgroundColor: colors.primary,
           },

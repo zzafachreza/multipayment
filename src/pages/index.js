@@ -24,6 +24,7 @@ import AccountEdit from './AccountEdit';
 import SEdit from './SEdit';
 import AAOrder from './AAOrder';
 import AASetor from './AASetor';
+import AAMember from './AAMember';
 
 // NEW
 
@@ -69,6 +70,7 @@ export {
   AccountEdit,
   SEdit,
   AAOrder,
-  AASetor
+  AASetor,
+  AAMember
 
 };

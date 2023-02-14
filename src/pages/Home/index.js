@@ -360,6 +360,17 @@ export default function Home({ navigation }) {
         </View>
       </TouchableOpacity>}
 
+      {user.level == 'Sales' &&
+
+        <View style={{
+          padding: 10,
+        }}>
+          <MyButton onPress={() => navigation.navigate('AAMember', {
+            fid_sales: user.id_user
+          })} title="Data Member Saya" Icons="people" />
+        </View>
+      }
+
 
       {user.level == 'Member' &&
         <View style={{

@@ -19,7 +19,7 @@ import { MyInput, MyGap, MyButton, MyPicker } from '../../components';
 import axios from 'axios';
 import { showMessage } from 'react-native-flash-message';
 import { apiURL, api_token, MYAPP } from '../../utils/localStorage';
-
+import GetLocation from 'react-native-get-location';
 export default function Register({ navigation }) {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
@@ -64,6 +64,8 @@ export default function Register({ navigation }) {
         nama_lengkap: '',
         fid_sales: '',
         telepon: '',
+        latitude: '',
+        longitude: '',
     });
 
     const simpan = () => {
@@ -80,6 +82,11 @@ export default function Register({ navigation }) {
         } else if (data.nama_lengkap.length === 0) {
             showMessage({
                 message: 'Maaf nama lengkap masih kosong !',
+            });
+        }
+        else if (data.latitude.length === 0) {
+            showMessage({
+                message: 'Pastikan lokasi nyala !',
             });
         }
         else if (data.telepon.length === 0) {
@@ -121,6 +128,19 @@ export default function Register({ navigation }) {
     useEffect(() => {
 
         getSales();
+
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+        })
+            .then(location => {
+                console.log(location);
+                setData({
+                    ...data,
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                })
+            })
 
     }, [])
 
