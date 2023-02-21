@@ -30,9 +30,9 @@ export default function SDaftar({ navigation, route }) {
                 setData(res.data);
                 let total = 0;
                 res.data.map(i => {
-                    if (i.tipe == 'D') {
+                    if (i.tipe == 'D' && i.status == 'Done') {
                         total += parseFloat(i.nominal);
-                    } else if (i.tipe == 'C') {
+                    } else if (i.tipe == 'C' && i.status == 'Done') {
                         total -= parseFloat(i.nominal);
                     }
 

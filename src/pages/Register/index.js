@@ -48,10 +48,26 @@ export default function Register({ navigation }) {
         axios.post(apiURL + 'sales').then(res => {
             console.log(res.data);
             setSales(res.data);
+
+            GetLocation.getCurrentPosition({
+                enableHighAccuracy: true,
+                timeout: 15000,
+            })
+                .then(location => {
+                    console.log(location);
+                    setData({
+                        ...data,
+                        latitude: location.latitude,
+                        longitude: location.longitude
+                    })
+                })
+
+
             setData({
                 ...data,
-                jenis: res.data[0].value
-            })
+                fid_sales: res.data[0].value
+            });
+
             // setData(res.data.data);
 
         })
@@ -129,18 +145,7 @@ export default function Register({ navigation }) {
 
         getSales();
 
-        GetLocation.getCurrentPosition({
-            enableHighAccuracy: true,
-            timeout: 15000,
-        })
-            .then(location => {
-                console.log(location);
-                setData({
-                    ...data,
-                    latitude: location.latitude,
-                    longitude: location.longitude
-                })
-            })
+
 
     }, [])
 
